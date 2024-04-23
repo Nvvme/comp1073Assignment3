@@ -1,6 +1,6 @@
 // Global API Keys
 const weatherApiKey = '799a848d03774a1089d222939242204'; // :)
-
+const mapboxApiKey = 'pk.eyJ1IjoiYnJvbmVuYXYiLCJhIjoiY2x2YmhvdjZtMDJ4ZDJrbGhzOGpxZmFlYSJ9.s8IBTZadzBY940KG_AUpOQ'; // Replace with your actual Mapbox key
 
 // WeatherAPI Documentation: https://www.weatherapi.com/docs/
 // Fetches weather data using WeatherAPI
@@ -62,3 +62,38 @@ function displayWeather(data) {
         body.style.backgroundColor = '#ECF0F1';  // Default background color
     }
 }
+
+// Mapbox API Documentation: https://docs.mapbox.com/api/
+// Initializes and displays a map using Mapbox
+function initMap(lat, lon) {
+    mapboxgl.accessToken = mapboxApiKey;
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lon, lat],
+        zoom: 12
+    });
+
+    new mapboxgl.Marker()
+        .setLngLat([lon, lat])
+        .addTo(map);
+}
+
+// Controls the main flow of the application, fetching weather and initializing the map
+async function getWeatherAndPlaces() {
+    const location = document.getElementById('location-input').value;
+    const weatherData = await getWeather(location);
+    if (weatherData && !weatherData.error) {
+        displayWeather(weatherData);
+        initMap(weatherData.location.lat, weatherData.location.lon);
+    } else {
+        displayWeather(weatherData);  // This will handle displaying errors to the user
+    }
+}
+
+// Adds event listener for the input box to trigger data fetch and display on 'Enter' key press
+document.getElementById('location-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        getWeatherAndPlaces();
+    }
+});
