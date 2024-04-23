@@ -1,6 +1,6 @@
 // Global API Keys
 const weatherApiKey = '799a848d03774a1089d222939242204'; // :)
-const mapboxApiKey = 'pk.eyJ1IjoiYnJvbmVuYXYiLCJhIjoiY2x2YmhvdjZtMDJ4ZDJrbGhzOGpxZmFlYSJ9.s8IBTZadzBY940KG_AUpOQ'; // Replace with your actual Mapbox key
+const mapboxApiKey = 'pk.eyJ1IjoiYnJvbmVuYXYiLCJhIjoiY2x2YmhvdjZtMDJ4ZDJrbGhzOGpxZmFlYSJ9.s8IBTZadzBY940KG_AUpOQ'; // this is my map box key // :))
 
 // WeatherAPI Documentation: https://www.weatherapi.com/docs/
 // Fetches weather data using WeatherAPI
@@ -46,7 +46,7 @@ function displayWeather(data) {
                 break;
             case weatherCondition.includes('cloud'):
                 emoji = '☁️';
-                body.style.backgroundColor = '#D0D3D4';
+                body.style.backgroundColor = '#454545';
                 break;
             default:
                 emoji = '🌍';
